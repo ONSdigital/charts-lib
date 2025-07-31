@@ -1,0 +1,54 @@
+name: Sync lib folder
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync-repos:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout source repository for lib
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        path: source-repo
+    
+    - name: Checkout target repository for Charts
+      uses: actions/checkout@v4
+      with:
+        repository: ONSvisual/Charts
+        token: ${{ secrets.SYNC_LIB }}
+        fetch-depth: 0
+        path: Charts
+    
+    - name: Clear existing lib folders in target repo
+      run: |
+        # Clear lib folder
+        rm -rf Charts/lib
+        mkdir -p Charts/lib
+    
+    - name: Copy files to target repo (excluding GitHub Actions)
+      run: |
+        # Copy to Charts/lib
+        rsync -av --exclude='.git' --exclude='.github' source-repo/ Charts/lib/
+    
+    - name: Commit and push changes to Charts
+      run: |
+        cd Charts
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # Add all changes
+        git add lib/
+        
+        # Only commit if there are changes
+        if git diff --staged --quiet; then
+          echo "No changes to commit to Charts"
+        else
+          git commit -m "Sync from lib: ${{ github.sha }}"
+          git push
+        fi
+    
