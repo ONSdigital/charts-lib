@@ -1167,10 +1167,6 @@ export function addAnnotationRangeHorizontal(svgName, width, yValue, yEndValue, 
  * @param {function} params.yScale - D3 y-axis scale.
  * @param {Object} [params.tooltipConfig] - Optional tooltip settings.
  * @param {*} params.shape - Shape function for points.
-//  * @param {number} params.circleSize - Size for circle points.
-//  * @param {number} params.squareSize - Size for square points.
-//  * @param {number} params.triangleSize - Size for triangle points.
-//  * @param {number} params.diamondSize - Size for diamond points.
  * @param {function} param.sizeScale - D3 size scale
  * @param {string} param.sizeField - column name in the data for size
  * @param {function} param.getSymbolSize - function to return size of symbol given data
@@ -1187,10 +1183,6 @@ export function createDelaunayOverlay({
   yScale,
   tooltipConfig = {},
   shape,
-  // circleSize,
-  // squareSize,
-  // triangleSize,
-  // diamondSize,
   sizeScale,
   sizeField,
   getSymbolSize,
