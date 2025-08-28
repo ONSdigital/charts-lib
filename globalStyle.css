@@ -231,16 +231,16 @@ text {
 /* title for small multiple panels */
 text.title{
   font-weight: 600;
-  font-size:14px;
+  font-size: 14px;
   fill: var(--ons-color-grey-100);
 }
 
 /* title for sub-groups in charts with groups */
 .groupLabels{
   font-weight: 600;
-  font-size:14px;
-  margin-top:0px;
-  margin-bottom:5px;
+  font-size: 14px;
+  margin-top: 0px;
+  margin-bottom: 5px;
   fill: var(--ons-color-grey-100);
 }
 
